@@ -9,11 +9,13 @@
 table,thead,tr,th,td {
     border:1px solid black;
     border-spacing: 0px; 
-    font-size: 1.5rem;   
+    font-size: 1.5rem;  
+    width: 50rem; 
 }
 
 th,td {
-    padding:1rem 5rem; 
+    padding:1rem; 
+    font-size: 1.3rem;
 }
 
 caption {
@@ -21,4 +23,12 @@ caption {
     font-weight: bold;
     margin: 1rem;
     text-align: center;
+}
+
+form 
+
+
+td{
+    letter-spacing: .1rem;
+    font-weight: bold;
 }

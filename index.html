@@ -5,18 +5,26 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 	<link rel="stylesheet" href="styles.css" type="text/css">
-</head>
- 
+</head> 
 <body>
-	<table class="table">
-		<caption>Bitcoin price</caption>
-		<th>			
-			Currency
-		</th>
-		<th>			
-			Price for 1 Bitcoin  
-		</th>
-	</table>		
+
+	
+	<table id="table">
+		<caption>
+			<form id="form" action="#beeba">
+				<fieldset>
+					<legend>Choose the country</legend>
+					<select name="countries" id="country">
+						<option onclick="changeCountry('us')" id="us" value="United+States">USA</option>
+						<option onclick="changeCountry('ca')" id="ca" value="Canada">Canada</option>
+						<option onclick="changeCountry('ua')" id="ua" value="Ukraine">Ukraine</option>
+					</select>
+					<input onclick="getCountry()" type="submit" name="" id="">
+				</fieldset>
+			</form>			
+		</caption>
+		
+	</table>
 </body>
 	<script src="main.js"></script>
 </html>

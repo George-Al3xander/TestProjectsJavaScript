@@ -1,5 +1,15 @@
- const url = "https://api.coindesk.com/v1/bpi/currentprice.json";
-const table = document.querySelector(".table");
+const form = document.getElementById("form");
+let country;
+let url;
+let table = document.getElementById("table");
+
+
+    //data[i].name and data[i].web_pages
+
+
+form.addEventListener("submit",(e)=>{
+    e.preventDefault();
+})
 
 function createElement(type, content) {
     let el = document.createElement(type);
@@ -8,42 +18,72 @@ function createElement(type, content) {
     return el;
 }
 
- async function createTable(url){
+
+
+async function getData(url) {
     let response = await fetch(url);
-    let data = await response.json();
-    let list = data.bpi;
-    console.log(list);
-    
-    let usdTr = createElement("tr","");
-    let gbpTr = createElement("tr","");
-    let eurTr = createElement("tr","");
+    let data = await response.json();     
+    let trHeader = createElement("tr","");
+    let thName = createElement("th","Name");
+    let thWebsite = createElement("th","Website");
+    trHeader.appendChild(thName);
+    trHeader.appendChild(thWebsite);
+    table.appendChild(trHeader);
+    for(let i=0;i<10;i++) {
+        let random = Math.floor(Math.random() * data.length);
+        // data[random].name
+        // data[random].web_pages[0]
 
-    let usdCurrency = createElement("td",list.USD.description);
-    let usdPrice = createElement("td",list.USD.rate.slice(0, 6));
-
-    let gbpCurrency = createElement("td",list.GBP.description);
-    let gbpPrice = createElement("td",list.GBP.rate.slice(0, 6));
-    
-
-    let eurCurrency = createElement("td",list.EUR.description);
-    let eurPrice = createElement("td",list.EUR.rate.slice(0, 6));
+        // <tr>
+		// 	<th>Name</th>
+		// 	<th>Website</th>
+		// </tr>
 
 
-    usdTr.appendChild(usdCurrency);
-    usdTr.appendChild(usdPrice);
+        let tr = createElement("tr","");
+        let name = createElement("td", data[random].name);
+        let link = createElement("td","");
+        let linkRef = createElement("a",data[random].web_pages[0])
+        linkRef.setAttribute("href",data[random].web_pages[0]);
+        linkRef.setAttribute("target","_blank");
+        link.appendChild(linkRef);
+        tr.appendChild(name);
+        tr.appendChild(link);
+        table.appendChild(tr);
 
-    gbpTr.appendChild(gbpCurrency);
-    gbpTr.appendChild(gbpPrice);
 
-    eurTr.appendChild(eurCurrency);
-    eurTr.appendChild(eurPrice);
+    } 
+        
+}
 
-    table.appendChild(usdTr);
-    table.appendChild(gbpTr);
-    table.appendChild(eurTr);
+ function getCountry() {
+    country = document.getElementById("country").value; 
+    console.log(country); 
+    url =`http://universities.hipolabs.com/search?country=${country}`;
+    getData(url);
+}
 
- }
-createTable(url);
+
+
+ 
+
+
+
+
+
+
+
+
+
+// function changeCountry(id) {
+//     let country = document.getElementById(id)
+//     country.addEventListener("onclick" , ()=> {
+//         console.log(country.value);
+//     })
+   
+// }
+
+
 
 
 
