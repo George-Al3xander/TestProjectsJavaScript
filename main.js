@@ -19,14 +19,14 @@ function createElement(type, content) {
     let eurTr = createElement("tr","");
 
     let usdCurrency = createElement("td",list.USD.description);
-    let usdPrice = createElement("td",list.USD.rate.slice(0, 4));
+    let usdPrice = createElement("td",list.USD.rate.slice(0, 6));
 
     let gbpCurrency = createElement("td",list.GBP.description);
-    let gbpPrice = createElement("td",list.GBP.rate.slice(0, 4));
+    let gbpPrice = createElement("td",list.GBP.rate.slice(0, 6));
     
 
     let eurCurrency = createElement("td",list.EUR.description);
-    let eurPrice = createElement("td",list.EUR.rate.slice(0, 4));
+    let eurPrice = createElement("td",list.EUR.rate.slice(0, 6));
 
 
     usdTr.appendChild(usdCurrency);
@@ -43,5 +43,7 @@ function createElement(type, content) {
     table.appendChild(eurTr);
 
  }
-
 createTable(url);
+
+
+
