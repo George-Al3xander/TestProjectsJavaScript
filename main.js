@@ -1,11 +1,8 @@
 const form = document.getElementById("form");
 let country;
 let url;
-let table = document.getElementById("table");
-
-
-    //data[i].name and data[i].web_pages
-
+let container = document.querySelector(".container");
+let isTableShown = false;
 
 form.addEventListener("submit",(e)=>{
     e.preventDefault();
@@ -21,24 +18,20 @@ function createElement(type, content) {
 
 
 async function getData(url) {
+    let table = createElement("table","");
+    table.setAttribute("id","table"); 
     let response = await fetch(url);
-    let data = await response.json();     
+    let data = await response.json();  
+    let cap = createElement("caption",`10 random universities of ${data[0].country}`);
     let trHeader = createElement("tr","");
     let thName = createElement("th","Name");
     let thWebsite = createElement("th","Website");
+    table.appendChild(cap);
     trHeader.appendChild(thName);
     trHeader.appendChild(thWebsite);
     table.appendChild(trHeader);
     for(let i=0;i<10;i++) {
         let random = Math.floor(Math.random() * data.length);
-        // data[random].name
-        // data[random].web_pages[0]
-
-        // <tr>
-		// 	<th>Name</th>
-		// 	<th>Website</th>
-		// </tr>
-
 
         let tr = createElement("tr","");
         let name = createElement("td", data[random].name);
@@ -50,17 +43,28 @@ async function getData(url) {
         tr.appendChild(name);
         tr.appendChild(link);
         table.appendChild(tr);
-
+        container.appendChild(table);
 
     } 
         
 }
 
  function getCountry() {
-    country = document.getElementById("country").value; 
-    console.log(country); 
-    url =`http://universities.hipolabs.com/search?country=${country}`;
-    getData(url);
+    if(isTableShown) {
+        let table = document.getElementById("table");
+        table.remove();
+        country = document.getElementById("country").value; 
+        console.log(country); 
+        url =`http://universities.hipolabs.com/search?country=${country}`;
+        getData(url);
+    } else {
+        country = document.getElementById("country").value; 
+        console.log(country); 
+        url =`http://universities.hipolabs.com/search?country=${country}`;
+        getData(url);          
+    }
+    
+    isTableShown = true;
 }
 
 
